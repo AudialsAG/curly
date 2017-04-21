@@ -276,6 +276,12 @@ curly_http_transaction_handle curly_http_get(const char* url, const char* header
     /* set options */
     curl_easy_setopt(http_get_handle, CURLOPT_URL, url);
 
+    if(my_config.resolve_host != NULL){
+        struct curl_slist *host = NULL;
+        host = curl_slist_append(NULL, my_config.resolve_host);
+        curl_easy_setopt(http_put_handle, CURLOPT_RESOLVE, host);
+    }
+
     if (my_config.do_not_verify_peer) {
         curl_easy_setopt(http_get_handle, CURLOPT_SSL_VERIFYPEER, 0L);
         CURLY_LOG("Warning: VERIFYPEER turned off");
@@ -366,6 +372,12 @@ curly_http_transaction_handle curly_http_put(const char* url, void* data, long s
     /* set options */
     curl_easy_setopt(http_put_handle, CURLOPT_URL, url);
     
+    if(my_config.resolve_host != NULL){
+        struct curl_slist *host = NULL;
+        host = curl_slist_append(NULL, my_config.resolve_host);
+        curl_easy_setopt(http_put_handle, CURLOPT_RESOLVE, host);
+    }
+
     if(my_config.log_options != 0) {
         curl_easy_setopt(http_put_handle, CURLOPT_DEBUGFUNCTION, &debug_func);
         curl_easy_setopt(http_put_handle, CURLOPT_VERBOSE, 1L);
@@ -437,6 +449,12 @@ curly_http_transaction_handle curly_http_post(const char* url, void* data, long 
     
     /* set options */
     curl_easy_setopt(http_post_handle, CURLOPT_URL, url);
+
+    if(my_config.resolve_host != NULL){
+        struct curl_slist *host = NULL;
+        host = curl_slist_append(NULL, my_config.resolve_host);
+        curl_easy_setopt(http_put_handle, CURLOPT_RESOLVE, host);
+    }
     
     if(my_config.log_options != 0) {
         curl_easy_setopt(http_post_handle, CURLOPT_DEBUGFUNCTION, &debug_func);
