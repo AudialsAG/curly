@@ -5,6 +5,7 @@
 #include <curl/curl.h>
 
 // This is not curly anymore. Basically it is only a wrapper to fit exactly our needs
+// Mainly the code is taken from a libcurl example: https://curl.haxx.se/libcurl/c/postinmemory.html
 
 struct MemoryStruct {
     char *memory;
@@ -31,7 +32,7 @@ WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp)
     return realsize;
 }
 
-char *curl_do_post(const char *url, const char *postdata, const char *resolve_host, const char **headers)
+char *curl_do_post(const char *url, const char *postdata, const char *resolve_host, const long timeout, const char **headers)
 {
     CURL *curl;
     CURLcode res;
@@ -59,6 +60,8 @@ char *curl_do_post(const char *url, const char *postdata, const char *resolve_ho
         curl_easy_setopt(curl,CURLOPT_HTTPHEADER,headers_list);
         
         curl_easy_setopt(curl, CURLOPT_URL, url);
+        
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, timeout);
         
         
         /* send all data to this function  */

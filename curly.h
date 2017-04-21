@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-char *curl_do_post(const char *url, const char *postdata, const char *resolve_host, const char **headers);
+char *curl_do_post(const char *url, const char *postdata, const char *resolve_host, const long timeout, const char **headers);
 
 #ifdef __cplusplus
 }
