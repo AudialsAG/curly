@@ -82,6 +82,17 @@ typedef struct curly_config{
      * Default: 0
      */
     int no_signal;
+
+    /**
+     * Overrides dns resolving of a domain. E.g. "example.com:80:127.0.0.1"
+     * https://curl.haxx.se/libcurl/c/resolve.html
+     *
+     * Default: NULL
+     */
+
+     char* resolve_host;
+
+
 } curly_config;
     
 /**
