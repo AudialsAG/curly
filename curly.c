@@ -5,6 +5,7 @@
 #include <curl/curl.h>
 
 // This is not curly anymore. Basically it is only a wrapper to fit exactly our needs
+// Mainly the code is taken from a libcurl example: https://curl.haxx.se/libcurl/c/postinmemory.html
 
 struct MemoryStruct {
     char *memory;
