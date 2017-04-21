@@ -279,7 +279,7 @@ curly_http_transaction_handle curly_http_get(const char* url, const char* header
     if(my_config.resolve_host != NULL){
         struct curl_slist *host = NULL;
         host = curl_slist_append(NULL, my_config.resolve_host);
-        curl_easy_setopt(http_put_handle, CURLOPT_RESOLVE, host);
+        curl_easy_setopt(http_get_handle, CURLOPT_RESOLVE, host);
     }
 
     if (my_config.do_not_verify_peer) {
@@ -453,7 +453,7 @@ curly_http_transaction_handle curly_http_post(const char* url, void* data, long 
     if(my_config.resolve_host != NULL){
         struct curl_slist *host = NULL;
         host = curl_slist_append(NULL, my_config.resolve_host);
-        curl_easy_setopt(http_put_handle, CURLOPT_RESOLVE, host);
+        curl_easy_setopt(http_post_handle, CURLOPT_RESOLVE, host);
     }
     
     if(my_config.log_options != 0) {
