@@ -62,7 +62,9 @@ char *curl_do_post(const char *url, const char *postdata, const char *resolve_ho
         curl_easy_setopt(curl, CURLOPT_URL, url);
         
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, timeout);
-        
+
+        // bobybacs: added following line, maybe this will solve the crash in curl
+        curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1);
         
         /* send all data to this function  */
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
