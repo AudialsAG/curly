@@ -82,8 +82,9 @@ char *curl_do_post(const char *url, const char *postdata, const char *resolve_ho
          itself */
         curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)strlen(postdata));
         
+        struct curl_slist *host = NULL;
+
         if(resolve_host != NULL){
-            struct curl_slist *host = NULL;
             host = curl_slist_append(NULL, resolve_host);
             curl_easy_setopt(curl, CURLOPT_RESOLVE, host);
         }
@@ -103,7 +104,9 @@ char *curl_do_post(const char *url, const char *postdata, const char *resolve_ho
         
         /* always cleanup */ 
         curl_easy_cleanup(curl);
-        
+        curl_slist_free_all(host);
+        curl_slist_free_all(headers_list);
+
         free(chunk.memory);
         
         /* we're done with libcurl, so clean it up */ 
